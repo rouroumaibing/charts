@@ -1,10 +1,10 @@
-# Helm package creation and publishing
+# helm包创建和发布
 
-## 1.Create a new repository "charts" and Add a README file
+## 一、创建仓库charts,勾选README.md
 
-## 2.Open github page. Setting->page->build and deployment->branch->main. save.
+## 二、开启github page。Setting->page->build and deployment->branch->main. save.
 
-## 3.Generate charts package
+## 三、生成charts包
 
 ```
 git clone git@github.com:rouroumaibing/charts.git
@@ -19,7 +19,7 @@ helm repo index .
 ```
 
 
-## 4. Push to github
+## 四、推送到仓库
 
 ```
 git add .
@@ -29,7 +29,7 @@ git commit -m "Add chart v0.1.0"
 git push -u origin main
 ```
 
-## 5. Deployment
+## 五、部署
 
 ```
 helm repo add charts https://rouroumaibing.github.io/charts
