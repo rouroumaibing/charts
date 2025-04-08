@@ -1,0 +1,30 @@
+# 创建 .github/workflows/publish.yaml 实现自动打包和更新索引：
+name: Publish Helm Chart
+
+on:
+  push:
+    paths:
+      - 'demo/**'  # 当 demo 目录内容变更时触发
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+
+      - name: Package Chart
+        run: |
+          helm package demo/
+          helm repo index . --url https://rouroumaibing.github.io/charts/
+
+      - name: Push Changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add index.yaml demo-*.tgz
+          git commit -m "Auto-update Helm chart"
+          git push
